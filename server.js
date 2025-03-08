@@ -1,18 +1,16 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve arquivos estáticos da pasta 'public'
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(express.json());
 
-// Conectar ao MongoDB Atlas (substitua sua URL de conexão)
-mongoose.connect(process.env.MONGODB_URI
-)
+const mongoUri = process.env.MONGODB_URI;
+mongoose.connect(mongoUri)
   .then(() => console.log('Conectado ao MongoDB Atlas'))
   .catch((err) => console.error('Erro ao conectar ao MongoDB:', err));
 
