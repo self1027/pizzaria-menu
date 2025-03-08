@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Pizzaria Famiglia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300;500&display=swap" rel="stylesheet">
+    <!-- Ícones do FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Estilos personalizados -->
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Estilo para o cabeçalho */
+        header {
+            background: rgba(255,255,255,0.95); 
+            padding: 15px 30px; 
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
+            backdrop-filter: blur(5px);
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex; 
+            align-items: center; 
+            gap: 20px;
+        }
+
+        .header-content img {
+            height: 60px; 
+            transition: transform 0.3s ease; 
+            cursor: pointer;
+        }
+
+        .header-content img:hover {
+            transform: rotate(-5deg) scale(1.05);
+        }
+
+        .header-text {
+            border-left: 2px solid #c53d24; 
+            padding-left: 20px;
+        }
+
+        .header-text h1 {
+            font-family: 'Playfair Display', serif; 
+            color: #3d2b1e; 
+            margin: 0; 
+            font-size: 2.2rem; 
+            letter-spacing: 1px; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .header-text p {
+            color: #6e5c4b; 
+            margin: 5px 0 0 0; 
+            font-size: 0.9rem; 
+            font-weight: 500; 
+            letter-spacing: 1px;
+        }
+
+        /* Estilo para dispositivos móveis */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 15px;
+            }
+
+            .header-content img {
+                height: 40px; /* Reduz a altura da logo */
+            }
+
+            .header-text h1 {
+                font-size: 1.5rem; /* Reduz o tamanho da fonte do título */
+            }
+
+            .header-text p {
+                font-size: 0.8rem; /* Reduz o tamanho da fonte do subtítulo */
+            }
+
+            .header-text {
+                padding-left: 10px; /* Reduz o padding à esquerda */
+            }
+        }
+
+        /* Estilo para a lista de aperitivos e acréscimos */
+        .lista-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Duas colunas */
+            gap: 40px; /* Espaçamento entre as colunas */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .lista {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .lista h3 {
+            font-family: 'Playfair Display', serif;
+            color: #3d2b1e;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .lista ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lista li {
+            padding: 15px 0;
+            border-bottom: 1px solid #f0e6dd;
+        }
+
+        .lista li:last-child {
+            border-bottom: none;
+        }
+
+        .lista li span.nome {
+            font-family: 'Montserrat', sans-serif;
+            color: #3d2b1e;
+            font-size: 1.2rem;
+            font-weight: 500;
+            display: block;
+        }
+
+        .lista li span.descricao {
+            font-family: 'Montserrat', sans-serif;
+            color: #5a4a3d;
+            font-size: 1rem;
+            font-weight: 300;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .lista li span.preco {
+            font-family: 'Playfair Display', serif;
+            color: #c53d24;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: block;
+            margin-top: 10px;
+        }
+
+        /* Estilo para a seção de comentários */
+        .comentarios-section {
+            background: #f8f4f0; /* Fundo diferente */
+            padding: 80px 20px;
+        }
+
+        .comentarios-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comentarios-container h2 {
+            font-family: 'Playfair Display', serif;
+            color: #3d2b1e;
+            font-size: 3rem; /* Título maior */
+            text-align: center;
+            margin-bottom: 60px; /* Mais espaço abaixo do título */
+        }
+
+        .comentarios-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 60px; /* Mais espaço entre a imagem e os comentários */
+        }
+
+        .comentarios-container img {
+            width: 400px; /* Imagem maior */
+            height: auto;
+            border-radius: 15px; /* Bordas arredondadas */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+
+        .comentarios-list {
+            flex: 1;
+        }
+
+        .comentario-item {
+            margin-bottom: 40px; /* Mais espaço entre os comentários */
+            position: relative;
+            padding-left: 60px; /* Espaço para as aspas */
+        }
+
+        .comentario-item::before {
+            content: "“"; /* Aspa de abertura */
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem; /* Aspas maiores */
+            color: #c53d24;
+            position: absolute;
+            left: 0;
+            top: -20px;
+        }
+
+        .comentario-item p {
+            font-family: 'Montserrat', sans-serif;
+            color: #5a4a3d;
+            font-size: 1.4rem; /* Texto maior */
+            margin: 0;
+            font-style: italic; /* Fonte diferente para os comentários */
+            line-height: 1.8; /* Espaçamento maior entre linhas */
+        }
+
+        .comentario-item h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #3d2b1e;
+            font-size: 1.5rem; /* Nome maior */
+            margin-top: 20px; /* Mais espaço acima do nome */
+            font-weight: 500;
+        }
+
+        .creditos-imagem {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .creditos-imagem a {
+            color: #c53d24;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .creditos-imagem a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo para a seção final */
+        .footer-section {
+            background: #2c3e50; /* Fundo mais escuro */
+            padding: 60px 20px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .footer-section .made-with {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-section .made-with .heart {
+            color: #c53d24; /* Cor do coração */
+        }
+
+        .footer-section .social-icons {
+            margin-bottom: 20px;
+        }
+
+        .footer-section .social-icons a {
+            color: #fff;
+            font-size: 2rem;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section .social-icons a:hover {
+            color: #c53d24; /* Cor ao passar o mouse */
+        }
+
+        .footer-section .contact-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+
+        .footer-section .contact-text a {
+            color: #c53d24;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-section .contact-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Estilo para dispositivos móveis */
+        @media (max-width: 768px) {
+            .lista-container {
+                grid-template-columns: 1fr; /* Uma coluna */
+                gap: 20px; /* Espaçamento menor */
+            }
+
+            .lista {
+                padding: 20px; /* menor para telas pequenas */
+            }
+
+            .lista h3 {
+                font-size: 1.5rem; /* Título menor */
+            }
+
+            .lista li span.nome {
+                font-size: 1.1rem; /* Nome menor */
+            }
+
+            .lista li span.descricao {
+                font-size: 0.9rem; /* Descrição menor */
+            }
+
+            .lista li span.preco {
+                font-size: 1.1rem; /* Preço menor */
+            }
+
+            .comentarios-content {
+                flex-direction: column; /* Coloca os comentários acima da imagem */
+                align-items: center;
+                gap: 40px;
+            }
+
+            .comentarios-container img {
+                width: 100%; /* Imagem ocupa a largura total */
+                max-width: 400px; /* Limita o tamanho máximo */
+            }
+
+            .comentario-item::before {
+                font-size: 4rem; /* Aspas menores em dispositivos móveis */
+                top: -10px;
+            }
+
+            .comentario-item p {
+                font-size: 1.2rem; /* Texto menor em dispositivos móveis */
+            }
+
+            .comentario-item h4 {
+                font-size: 1.3rem; /* Nome menor em dispositivos móveis */
+            }
+        }
+    </style>
+</head>
+
+<body style="margin: 0; font-family: 'Montserrat', sans-serif;">
+
+<!-- Header Estilizado -->
+<header>
+    <div class="header-content">
+        <img src="./images/logo.png" alt="Logo">
+        <div class="header-text">
+            <h1>La Pizzaria Famiglia</h1>
+            <p>Desde 1998</p>
+        </div>
+    </div>
+</header>
+
+<!-- Seção Pizzas com Background -->
+<div style="position: relative; background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1590947132387-155cc02f3212'); background-size: cover; background-attachment: fixed; padding: 80px 20px 120px 20px;">
+
+    <!-- Conteúdo Pizzas -->
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h1 style="font-family: 'Playfair Display', serif; text-align: center; color: #fff; 
+            font-size: 3rem; letter-spacing: 2px; margin: 60px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-out;">
+            Le Nostre Specialità
+        </h1>
+
+        <!-- Grid de Pizzas -->
+        <div id="catalogo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 40px; padding: 0 20px;">
+        </div>
+
+        <!-- Créditos Freepik -->
+        <p style="text-align: center; color: rgba(255,255,255,0.8); margin-top: 60px; font-size: 0.9rem;">
+            Imagens de <a href="https://www.freepik.com" target="_blank" style="color: #ffd700; text-decoration: none; font-weight: 500;">Freepik</a>
+        </p>
+    </div>
+</div>
+
+<!-- Seção Aperitivos e Acréscimos -->
+<div style="background: #fff5ed; padding: 80px 20px;">
+    <div class="lista-container">
+        <!-- Lista de Aperitivos -->
+        <div class="lista">
+            <h3>Aperitivos</h3>
+            <ul id="lista-aperitivos">
+            </ul>
+        </div>
+
+        <!-- Lista de Acréscimos -->
+        <div class="lista">
+            <h3>Acréscimos</h3>
+            <ul id="lista-acrescimos">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Seção de Comentários -->
+<div class="comentarios-section">
+    <div class="comentarios-container">
+        <h2>Testemunhos</h2>
+        <div class="comentarios-content">
+            <!-- Lista de Comentários -->
+            <div class="comentarios-list" id="comentarios-list">
+                <!-- Comentários serão inseridos aqui -->
+            </div>
+
+            <div>
+                <img src="./images/imgComentarios.jpg" alt="Imagem Comentários">
+                <p class="creditos-imagem">
+                    Imagem de <a href="https://www.freepik.com" target="_blank">Freepik</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Seção Final -->
+<div class="footer-section">
+    <div class="made-with">
+        Made with <span class="heart">❤️</span> by Murilo D.
+    </div>
+    <div class="social-icons">
+        <a href="https://github.com/self1027" target="_blank">
+            <i class="fab fa-github"></i> GitHub <!-- Fallback text -->
+        </a>
+        <a href="https://www.linkedin.com/in/murilo-dias-chossani-640ba0320/" target="_blank">
+            <i class="fab fa-linkedin"></i> LinkedIn <!-- Fallback text -->
+        </a>
+    </div>
+    <div class="contact-text">
+        Quer uma página assim? Entre em contato pelo email <a href="mailto:diasmurilo02@gmail.com">diasmurilo02@gmail.com</a>
+    </div>
+</div>
+
+<script>
+    // Função para carregar as pizzas
+    fetch('http://localhost:3000/catalogo')
+      .then(response => response.json())
+      .then(pizzas => {
+          const catalogoDiv = document.getElementById('catalogo');
+          pizzas.forEach((pizza, index) => {
+              const pizzaCard = `
+                  <div style="background: rgba(255,255,255,0.95); border-radius: 15px; padding-bottom: 25px;
+                      box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+                      animation: fadeIn 0.8s ease-out ${index*0.2}s forwards; opacity: 0;
+                      transition: all 0.3s ease; overflow: hidden;">
+                      
+                      <div style="position: relative; overflow: hidden;">
+                          <img src="${pizza.imagemUrl}" alt="${pizza.nome}" 
+                              style="width: 100%; height: 280px; object-fit: cover; 
+                              transition: transform 0.4s ease;">
+                          <div style="position: absolute; bottom: 0; left: 0; right: 0; 
+                              background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); 
+                              padding: 20px;">
+                              <h2 style="font-family: 'Playfair Display', serif; color: #fff; 
+                                  margin: 0; font-size: 1.8rem; letter-spacing: 0.5px;
+                                  text-shadow: 1px 1px 3px rgba(0,0,0,0.5);">
+                                  ${pizza.nome}
+                              </h2>
+                          </div>
+                      </div>
+                      
+                      <div style="padding: 25px; text-align: center;">
+                          <p style="color: #5a4a3d; font-size: 1.05rem; line-height: 1.6; 
+                              margin: 0 0 15px 0; font-weight: 300;">
+                              ${pizza.descricao}
+                          </p>
+                          
+                          <div style="display: flex; justify-content: center; align-items: center; 
+                              gap: 15px; margin-top: 20px;">
+                              <span style="font-family: 'Playfair Display', serif; color: #c53d24; 
+                                  font-size: 1.8rem; font-weight: 600; letter-spacing: 1px;">
+                                  R$ ${pizza.preco.toFixed(2)}
+                              </span>
+                              <span style="background: #f0e6dd; color: #5a4a3d; padding: 8px 20px;
+                                  border-radius: 25px; font-size: 0.95rem; font-weight: 500;">
+                                  ${pizza.categoria}
+                              </span>
+                          </div>
+                      </div>
+                  </div>
+              `;
+              catalogoDiv.innerHTML += pizzaCard;
+          });
+      })
+      .catch(error => console.log('Erro ao carregar o catálogo:', error));
+
+    // Função para carregar aperitivos e acréscimos
+    Promise.all([
+        fetch('http://localhost:3000/aperitivos').then(response => response.json()),
+        fetch('http://localhost:3000/acrescimos').then(response => response.json())
+    ])
+    .then(([aperitivos, acrescimos]) => {
+        const listaAperitivos = document.getElementById('lista-aperitivos');
+        const listaAcrescimos = document.getElementById('lista-acrescimos');
+
+        // Adicionar aperitivos
+        aperitivos.forEach(item => {
+            const itemLi = `
+                <li>
+                    <span class="nome">${item.nome}</span>
+                    <span class="descricao">${item.descricao}</span>
+                    <span class="preco">R$ ${item.preco.toFixed(2)}</span>
+                </li>
+            `;
+            listaAperitivos.innerHTML += itemLi;
+        });
+
+        // Adicionar acréscimos
+        acrescimos.forEach(item => {
+            const itemLi = `
+                <li>
+                    <span class="nome">${item.nome}</span>
+                    <span class="preco">R$ ${item.preco.toFixed(2)}</span>
+                </li>
+            `;
+            listaAcrescimos.innerHTML += itemLi;
+        });
+    })
+    .catch(error => console.log('Erro ao carregar aperitivos e acréscimos:', error));
+
+    // Função para carregar comentários
+    fetch('http://localhost:3000/comentarios')
+      .then(response => response.json())
+      .then(comentarios => {
+          const comentariosList = document.getElementById('comentarios-list');
+          comentariosList.innerHTML = ''; // Limpa a lista antes de adicionar
+
+          comentarios.forEach(comentario => {
+              const comentarioItem = `
+                  <div class="comentario-item">
+                      <p>${comentario.texto}</p>
+                      <h4>— ${comentario.nome}</h4>
+                  </div>
+              `;
+              comentariosList.innerHTML += comentarioItem;
+          });
+      })
+      .catch(error => console.log('Erro ao carregar comentários:', error));
+</script>
+
+</body>
+</html>
