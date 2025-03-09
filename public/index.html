@@ -276,18 +276,24 @@
             color: #c53d24; /* Cor do coração */
         }
 
-        .footer-section .social-icons {
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap; /* Permite que os elementos quebrem para a próxima linha */
+            justify-content: center; /* Centraliza os ícones */
+            gap: 15px; /* Espaçamento entre os ícones */
             margin-bottom: 20px;
         }
 
-        .footer-section .social-icons a {
+        .social-icons a {
+            display: flex;
+            align-items: center; /* Alinha o ícone e o texto verticalmente */
+            gap: 5px; /* Espaçamento entre o ícone e o texto */
             color: #fff;
             font-size: 2rem;
-            margin: 0 15px;
             transition: color 0.3s ease;
         }
 
-        .footer-section .social-icons a:hover {
+        .social-icons a:hover {
             color: #c53d24; /* Cor ao passar o mouse */
         }
 
@@ -373,7 +379,7 @@
     </header>
 
     <!-- Seção Pizzas com Background -->
-    <div style="position: relative; background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1590947132387-155cc02f3212'); background-size: cover; background-attachment: fixed; padding: 80px 20px 120px 20px;">
+    <div style="position: relative; background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1590947132387-155cc02f3212'); background-size: cover; background-position: center; background-attachment: fixed; padding: 80px 20px 120px 20px;">
         <!-- Conteúdo Pizzas -->
         <div style="max-width: 1200px; margin: 0 auto;">
             <h1 style="font-family: 'Playfair Display', serif; text-align: center; color: #fff; 
@@ -382,8 +388,8 @@
                 Le Nostre Specialità
             </h1>
             <!-- Grid de Pizzas -->
-            <div id="catalogo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-                gap: 40px; padding: 0 20px;">
+            <div id="catalogo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+                gap: 20px; padding: 0 10px;">
             </div>
             <!-- Créditos Freepik -->
             <p style="text-align: center; color: rgba(255,255,255,0.8); margin-top: 60px; font-size: 0.9rem;">
