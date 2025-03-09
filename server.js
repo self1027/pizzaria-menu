@@ -19,7 +19,7 @@ console.log('MONGODB_URI:', process.env.MONGODB_URI);
 
 const uri = process.env.MONGODB_URI;
 
-mongoose.connect(uri)
+mongoose.connect(uri, {serverSelectionTimeoutMS: 5000, // 5 segundos})
   .then(() => {
     console.log('Conectado ao MongoDB com sucesso!');
   })
