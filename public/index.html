@@ -439,7 +439,7 @@
 
 <script>
     // Função para carregar as pizzas
-    fetch('http://localhost:3000/catalogo')
+    fetch('./catalogo')
       .then(response => response.json())
       .then(pizzas => {
           const catalogoDiv = document.getElementById('catalogo');
@@ -492,8 +492,8 @@
 
     // Função para carregar aperitivos e acréscimos
     Promise.all([
-        fetch('http://localhost:3000/aperitivos').then(response => response.json()),
-        fetch('http://localhost:3000/acrescimos').then(response => response.json())
+        fetch('./aperitivos').then(response => response.json()),
+        fetch('./acrescimos').then(response => response.json())
     ])
     .then(([aperitivos, acrescimos]) => {
         const listaAperitivos = document.getElementById('lista-aperitivos');
@@ -525,7 +525,7 @@
     .catch(error => console.log('Erro ao carregar aperitivos e acréscimos:', error));
 
     // Função para carregar comentários
-    fetch('http://localhost:3000/comentarios')
+    fetch('./comentarios')
       .then(response => response.json())
       .then(comentarios => {
           const comentariosList = document.getElementById('comentarios-list');
