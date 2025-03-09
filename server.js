@@ -11,11 +11,8 @@ app.use(express.json());
 
 // Logar todas as requisições
 app.use((req, res, next) => {
-  console.log(`Requisição recebida: ${req.method} ${req.url}`);
   next();
 });
-
-console.log('MONGODB_URI:', process.env.MONGODB_URI);
 
 const uri = process.env.MONGODB_URI;
 
@@ -57,10 +54,8 @@ const Comentario = mongoose.model('Comentario', comentarioSchema);
 
 // Rota para retornar pizzas
 app.get('/catalogo', async (req, res) => {
-  console.log('Requisição para /catalogo');
   try {
     const pizzas = await Pizza.find();
-    console.log('Pizzas encontradas:', pizzas);
     res.json(pizzas);
   } catch (err) {
     console.error('Erro ao buscar pizzas:', err);
@@ -70,10 +65,8 @@ app.get('/catalogo', async (req, res) => {
 
 // Rota para retornar aperitivos
 app.get('/aperitivos', async (req, res) => {
-  console.log('Requisição para /aperitivos');
   try {
     const aperitivos = await Aperitivo.find();
-    console.log('Aperitivos encontrados:', aperitivos);
     res.json(aperitivos);
   } catch (err) {
     console.error('Erro ao buscar aperitivos:', err);
@@ -83,10 +76,8 @@ app.get('/aperitivos', async (req, res) => {
 
 // Rota para retornar acréscimos
 app.get('/acrescimos', async (req, res) => {
-  console.log('Requisição para /acrescimos');
   try {
     const acrescimos = await Acrescimo.find();
-    console.log('Acréscimos encontrados:', acrescimos);
     res.json(acrescimos);
   } catch (err) {
     console.error('Erro ao buscar acréscimos:', err);
@@ -96,10 +87,8 @@ app.get('/acrescimos', async (req, res) => {
 
 // Rota para retornar comentários
 app.get('/comentarios', async (req, res) => {
-  console.log('Requisição para /comentarios');
   try {
     const comentarios = await Comentario.find();
-    console.log('Comentários encontrados:', comentarios);
     res.json(comentarios);
   } catch (err) {
     console.error('Erro ao buscar comentários:', err);
