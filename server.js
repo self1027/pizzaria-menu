@@ -1,44 +1,55 @@
 const express = require('express');
+require('dotenv').config();
 const mongoose = require('mongoose');
 const path = require('path');
-require('dotenv').config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
-const mongoUri = process.env.MONGODB_URI;
-mongoose.connect(mongoUri)
-  .then(() => console.log('Conectado ao MongoDB Atlas'))
-  .catch((err) => console.error('Erro ao conectar ao MongoDB:', err));
+// URL de conexão do MongoDB Atlas (substitua com suas credenciais)
+const uri = process.env.MONGODB_URI;
 
+// Conectar ao MongoDB usando Mongoose
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log('Conectado ao MongoDB com sucesso!');
+  })
+  .catch((err) => {
+    console.error('Erro ao conectar ao MongoDB:', err);
+  });
+
+// Definição dos schemas do MongoDB
 const pizzaSchema = new mongoose.Schema({
   nome: String,
   descricao: String,
   preco: Number,
   categoria: String,
-  imagemUrl: String
+  imagemUrl: String,
 });
 const Pizza = mongoose.model('Pizza', pizzaSchema);
 
 const aperitivoSchema = new mongoose.Schema({
   nome: String,
   descricao: String,
-  preco: Number
+  preco: Number,
 });
 const Aperitivo = mongoose.model('Aperitivo', aperitivoSchema);
 
 const acrescimoSchema = new mongoose.Schema({
   nome: String,
-  preco: Number
+  preco: Number,
 });
 const Acrescimo = mongoose.model('Acrescimo', acrescimoSchema);
 
 const comentarioSchema = new mongoose.Schema({
   nome: String,
-  texto: String
+  texto: String,
 });
 const Comentario = mongoose.model('Comentario', comentarioSchema);
 
@@ -86,5 +97,3 @@ app.get('/comentarios', async (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
-
-module.exports = { Pizza, Aperitivo, Acrescimo, Comentario };
