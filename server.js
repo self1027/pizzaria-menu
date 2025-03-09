@@ -9,14 +9,9 @@ const port = 3000;
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 
-// URL de conexão do MongoDB Atlas (substitua com suas credenciais)
 const uri = process.env.MONGODB_URI;
 
-// Conectar ao MongoDB usando Mongoose
-mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(uri)
   .then(() => {
     console.log('Conectado ao MongoDB com sucesso!');
   })
@@ -24,7 +19,6 @@ mongoose.connect(uri, {
     console.error('Erro ao conectar ao MongoDB:', err);
   });
 
-// Definição dos schemas do MongoDB
 const pizzaSchema = new mongoose.Schema({
   nome: String,
   descricao: String,
